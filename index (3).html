@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stichting Cultuurpodium De Bilt e.o.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green-dark: #00582e;
+      --green-soft: #107c41;
+      --gold: #f4c430;
+      --accent-mint: #00b98b;
+      --offwhite: #fdf8f0;
+      --text-dark: #102018;
+      --radius-xl: 1.75rem;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Playfair Display", serif;
+      background: var(--offwhite);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1100px, 100% - 2.5rem);
+      margin: 0 auto;
+    }
+
+    .flex {
+      display: flex;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 1.8rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), #ffe792);
+      color: #204020;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      color: #fff;
+    }
+    .btn-outline:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    header {
+      background: var(--green-dark);
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav {
+      padding: 0.7rem 0;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .logo-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ffe792, var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    .logo-note {
+      width: 20px;
+      height: 26px;
+      border-radius: 999px;
+      border: 3px solid var(--green-dark);
+      border-top: none;
+      transform: rotate(-10deg);
+      position: relative;
+    }
+
+    .logo-note::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -13px;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 16px;
+      background: var(--green-dark);
+      border-radius: 999px;
+    }
+
+    .logo-note::after {
+      content: "";
+      position: absolute;
+      right: -4px;
+      top: 2px;
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      border: 3px solid var(--green-dark);
+      background: #ffe792;
+    }
+
+    .logo-text {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-size: 0.78rem;
+      line-height: 1.2;
+    }
+
+    .logo-text span {
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.2rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 999px;
+    }
+
+    .hero {
+      position: relative;
+      background-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.6),
+          rgba(0, 0, 0, 0.7)
+        ),
+        url("Afbeelding1.jpg");
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+    }
+
+    .hero-inner {
+      padding: 4rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(2.3rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .hero-subtitle {
+      max-width: 38rem;
+      font-size: 1.02rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.87;
+    }
+
+    .hero-card {
+      background: rgba(6, 40, 22, 0.96);
+      border-radius: var(--radius-xl);
+      padding: 1.8rem 1.6rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-card h2 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-card p {
+      font-size: 0.94rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 0.38rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      opacity: 0.9;
+      background: rgba(0, 0, 0, 0.12);
+    }
+
+    section {
+      padding: 3.8rem 0;
+    }
+
+    .section-heading {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.9rem;
+      color: var(--green-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+      color: var(--green-dark);
+    }
+
+    .section-intro {
+      max-width: 46rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+      gap: 2.4rem;
+      align-items: start;
+    }
+
+    .about-card {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      padding: 1.7rem 1.6rem 1.6rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .about-card + .about-card {
+      margin-top: 1.2rem;
+    }
+
+    .about-card h3 {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.92rem;
+      color: var(--green-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .about-card p {
+      font-size: 0.96rem;
+    }
+
+    .locations {
+      background: linear-gradient(135deg, var(--green-dark), #031f12);
+      color: #fff;
+    }
+
+    .locations-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.2fr);
+      gap: 2.2rem;
+      align-items: stretch;
+    }
+
+    .location-card {
+      background: rgba(0, 0, 0, 0.22);
+      border-radius: var(--radius-xl);
+      padding: 1.6rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+    }
+
+    .location-name {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .location-address {
+      font-size: 0.97rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .location-detail {
+      font-size: 0.88rem;
+      opacity: 0.9;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 0.9rem;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-mint);
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.6rem;
+    }
+
+    .event-card {
+      background: #fff;
+      border-radius: var(--radius-xl);
+      padding: 1.4rem 1.3rem 1.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .event-date {
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--green-soft);
+    }
+
+    .event-title {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .event-meta {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .event-tag {
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      align-self: flex-start;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(0, 88, 46, 0.06);
+      color: var(--green-dark);
+    }
+
+    .cta {
+      padding: 3.6rem 0 3.9rem;
+    }
+
+    .cta-inner {
+      background: linear-gradient(135deg, var(--green-dark), var(--green-soft));
+      border-radius: calc(var(--radius-xl) * 1.1);
+      padding: 2.4rem 2.1rem;
+      color: #fff;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+      gap: 2.3rem;
+      align-items: center;
+    }
+
+    .cta-inner h2 {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 1.1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .cta-inner p {
+      font-size: 0.98rem;
+    }
+
+    .cta-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.9rem;
+    }
+
+    .caps-small {
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    footer {
+      background: #03140b;
+      color: rgba(255, 255, 255, 0.85);
+      padding: 1.8rem 0 1.9rem;
+      font-size: 0.85rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-inner span {
+      opacity: 0.85;
+    }
+
+    .footer-links {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      display: flex;
+      gap: 1.1rem;
+    }
+
+    .footer-links a {
+      opacity: 0.8;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 840px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .cta-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .about-grid,
+      .locations-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        inset: 56px 0 auto 0;
+        background: rgba(0, 28, 15, 0.98);
+        padding: 0.8rem 1.25rem 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.9rem;
+        transform: translateY(-140%);
+        transition: transform 0.2s ease;
+        z-index: 40;
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+      }
+
+      .hero-inner {
+        padding: 3.25rem 0 3.4rem;
+      }
+
+      .hero-card {
+        margin-top: 0.8rem;
+      }
+
+      .cta-inner {
+        padding: 2rem 1.5rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <header>
+    <div class="container nav flex">
+      <a href="#top" class="logo-wrap">
+        <div class="logo-badge">
+          <div class="logo-note"></div>
+        </div>
+        <div class="logo-text">
+          <span>Stichting</span>
+          <span>Cultuurpodium</span>
+          <span>De Bilt e.o.</span>
+        </div>
+      </a>
+
+      <nav aria-label="Hoofdmenu">
+        <div class="nav-toggle" id="navToggle" aria-label="Menu openen">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="#over">Over ons</a>
+          <a href="#locaties">Locaties</a>
+          <a href="#agenda">Agenda</a>
+          <a href="#meedoen">Meedoen</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <p class="eyebrow">Welkom bij Stichting Cultuurpodium De Bilt e.o.</p>
+          <h1>Samen bouwen we aan een levendig & eerlijk podium voor cultuur</h1>
+          <p class="hero-subtitle">
+            Je vindt ons o.a. in <strong>Pomp&nbsp;41</strong>, Dorpsstraat&nbsp;41–43,
+            3732&nbsp;HH&nbsp;De&nbsp;Bilt en in <strong>De&nbsp;Clou</strong>,
+            Molenkamp&nbsp;44, 3732&nbsp;EV&nbsp;De&nbsp;Bilt. Neem maar gauw een kijkje – de deur staat open voor makers én publiek.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#agenda" class="btn btn-primary">Bekijk de agenda</a>
+            <a href="#meedoen" class="btn btn-outline">Ik wil meedoen</a>
+          </div>
+
+          <div class="hero-meta">
+            <span>muziek &amp; theater</span>
+            <span>spoken word &amp; debat</span>
+            <span>inclusie &amp; ontmoeting</span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Kern van onze stichting">
+          <h2>Een daadkrachtige, vernieuwende &amp; eerlijke naam</h2>
+          <p>
+            We geven een frisse en inclusieve invulling aan wat de toekomst brengt:
+            een podium waar iedereen zich welkom voelt, ongeacht leeftijd, achtergrond
+            of ervaring.
+          </p>
+          <div class="tag-list">
+            <span class="tag">Lokale makers</span>
+            <span class="tag">Vrijwilligers</span>
+            <span class="tag">Podiumkansen</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="over">
+      <div class="container">
+        <p class="section-heading">Over ons</p>
+        <h2 class="section-title">Stichting Cultuurpodium De Bilt e.o.</h2>
+        <p class="section-intro">
+          Wij zijn een cultureel podium voor en door bewoners van De Bilt en omgeving.
+          Geen ivoren toren, maar een warme huiskamer waar initiatiefnemers, artiesten,
+          vrijwilligers en publiek elkaar ontmoeten. Van intiem luisterconcert tot uitbundig
+          dorpsfeest – als het verbindt, verrast of aan het denken zet, dan is het welkom.
+        </p>
+
+        <div class="about-grid">
+          <div>
+            <article class="about-card">
+              <h3>Wat we organiseren</h3>
+              <p>
+                Concerten, jamsessies, open podia, filmavonden, kleinkunst, talkshows,
+                workshops en buurfeestjes: we mixen genres en doelgroepen. Ons programma
+                groeit continu mee met ideeën uit het dorp. Heb jij een plan? Dan denken we
+                graag mee over podium, promotie en productie.
+              </p>
+            </article>
+
+            <article class="about-card">
+              <h3>Voor wie we er zijn</h3>
+              <p>
+                Voor iedereen die cultuur wil maken of beleven. Jong talent, ervaren
+                professionals, buurtbandjes, scholen, verenigingen, zorginstellingen:
+                we zoeken actief naar combinaties die elkaar versterken. Zo ontstaat een
+                cultuurpodium dat net zo divers is als De Bilt zelf.
+              </p>
+            </article>
+          </div>
+
+          <div>
+            <article class="about-card">
+              <h3>Onze belofte</h3>
+              <p>
+                Eerlijk, transparant en menselijk. We werken zonder verborgen drempels:
+                heldere afspraken, eerlijke tarieven waar mogelijk en oog voor wie
+                minder makkelijk mee kan doen. We geloven dat cultuur geen luxe is,
+                maar een basis voor een gezonde, verbonden gemeenschap.
+              </p>
+            </article>
+            <article class="about-card">
+              <h3>Zo kun je meedoen</h3>
+              <p>
+                Meespelen, meedenken, meewerken – alles kan. We zoeken muzikanten,
+                theatermakers, technici, programmamakers én koffieschenkers. Samen
+                houden we Pomp&nbsp;41 en De&nbsp;Clou levendige plekken waar elke week
+                iets te ontdekken valt.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="locations" id="locaties">
+      <div class="container">
+        <p class="section-heading">Locaties</p>
+        <h2 class="section-title" style="color:#fff;">Waar je ons vindt</h2>
+        <p class="section-intro">
+          Twee vaste plekken, één missie: ruimte maken voor ontmoeting, talent en experiment.
+          Beide locaties zijn goed bereikbaar en hebben hun eigen sfeer – van intieme
+          huiskamersetting tot bruisende festivalavond.
+        </p>
+
+        <div class="locations-grid">
+          <article class="location-card">
+            <div class="badge">
+              <span class="badge-dot"></span>
+              <span>Pomp 41</span>
+            </div>
+            <p class="location-name">Pomp 41 – Dorpsstraat 41–43</p>
+            <p class="location-address">3732 HH De Bilt</p>
+            <p class="location-detail">
+              Een karakteristieke plek midden in de Dorpsstraat. Ideaal voor kleinschalige
+              concerten, literaire avonden en intieme theater- of cabaretvoorstellingen.
+              Hier proef je de energie van het dorp – letterlijk en figuurlijk.
+            </p>
+          </article>
+
+          <article class="location-card">
+            <div class="badge">
+              <span class="badge-dot"></span>
+              <span>De Clou</span>
+            </div>
+            <p class="location-name">De Clou – Molenkamp 44</p>
+            <p class="location-address">3732 EV De Bilt</p>
+            <p class="location-detail">
+              Een verrassende zaal voor bands, dans, grotere programma’s en evenementen
+              samen met partners uit de regio. Van festivalavond tot buurtproject:
+              De&nbsp;Clou is onze speelplek voor groter werk.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="agenda">
+      <div class="container">
+        <p class="section-heading">Agenda</p>
+        <h2 class="section-title">Een greep uit wat eraan komt</h2>
+        <p class="section-intro">
+          We werken continu aan een fris en inclusief programma. Hieronder zie je een
+          paar voorbeelden van activiteiten zoals je die bij ons kunt verwachten.  
+          Kijk later op de officiële agenda (website / socials) voor de meest actuele data.
+        </p>
+
+        <div class="events-grid">
+          <article class="event-card">
+            <div class="event-date">Vrijdagavond</div>
+            <div class="event-title">Luisterconcert in Pomp 41</div>
+            <p class="event-meta">
+              Intiem concert met regionale singer-songwriters. Kleine setting, warme sfeer,
+              ruimte voor verhalen achter de muziek.
+            </p>
+            <span class="event-tag">Muziek</span>
+          </article>
+
+          <article class="event-card">
+            <div class="event-date">Zaterdagmiddag</div>
+            <div class="event-title">Buurtpodium De Clou</div>
+            <p class="event-meta">
+              Een vrolijke mix van lokale bands, jong talent, spoken word en verrassende
+              gastoptredens. De perfecte kennismaking met het cultuurpodium.
+            </p>
+            <span class="event-tag">Podium</span>
+          </article>
+
+          <article class="event-card">
+            <div class="event-date">Door het jaar heen</div>
+            <div class="event-title">Workshops &amp; projecten</div>
+            <p class="event-meta">
+              Van songwriting tot theatermaken, van community-project tot buurtkoor.
+              Samen met partners in De Bilt ontwikkelen we programma’s op maat.
+            </p>
+            <span class="event-tag">Mee doen</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="meedoen">
+      <div class="container">
+        <div class="cta-inner">
+          <div>
+            <p class="caps-small">Doe mee</p>
+            <h2>Word onderdeel van het cultuurpodium</h2>
+            <p>
+              Heb je een idee voor een programma, ben je artiest of wil je als vrijwilliger
+              meehelpen? Laat van je horen. Samen verkennen we wat mogelijk is in Pomp&nbsp;41,
+              De&nbsp;Clou en daarbuiten.  
+              Een mail, een kop koffie of een spontaan gesprek tijdens een avond:
+              het begint allemaal met contact.
+            </p>
+          </div>
+          <div class="cta-right">
+            <p class="caps-small">Contact</p>
+            <p>
+              Stuur ons een bericht via het contactformulier (binnenkort online) of
+              neem contact op via onze social kanalen.  
+              Vermeld kort wie je bent, wat je wilt doen en waar je aan denkt – dan
+              reageren wij zo snel mogelijk.
+            </p>
+            <a href="#top" class="btn btn-primary">Terug naar boven</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>&copy; <span id="year"></span> Stichting Cultuurpodium De Bilt e.o.</span>
+      <div class="footer-links">
+        <a href="#over">Over ons</a>
+        <a href="#locaties">Locaties</a>
+        <a href="#agenda">Agenda</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+      });
+    });
+  </script>
+</body>
+</html>
